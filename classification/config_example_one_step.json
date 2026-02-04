@@ -1,0 +1,13 @@
+{
+  "_comment": "Single-step classification: directly identify relevant techniques",
+  "_comment_parallel": "num_workers (default 1) and retries (default 3) control parallel execution",
+  "num_workers": 1,
+  "retries": 3,
+  "relevant_step": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "top_k": 3,
+    "use_short_descriptions": true,
+    "prompt": "You are a cybersecurity expert. Given the following list of MITRE ATT&CK techniques:\n\n{descriptions}\n\nAnalyze this detection rule and identify the {top_k} most relevant techniques:\n\nDETECTION RULE:\n{rule_content}\n\nList only technique IDs, most relevant first. No explanations."
+  }
+}

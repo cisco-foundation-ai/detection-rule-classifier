@@ -1,0 +1,140 @@
+{
+  "insights": {
+    "visualization_insights": {
+      "tactic_coverage": {
+        "description": "The detection coverage is heavily concentrated on tactics such as Credential Access, Persistence, and Defense Evasion, with significant rule mappings for techniques like Valid Accounts (T1078) and Modify Authentication Process (T1556). However, there are notable gaps in tactics such as Lateral Movement and Collection, which have fewer rule mappings despite their critical role in an attack lifecycle. Addressing these gaps could enhance the organization's ability to detect and respond to threats effectively.",
+        "insights": [
+          "Lateral Movement techniques like Remote Services (T1021) and Use Alternate Authentication Material (T1550) have relatively low rule mappings. Increasing coverage here can improve detection of adversaries moving within the network.",
+          "Collection tactics, particularly techniques like Data from Network Shared Drive (T1039) and Email Collection (T1114), are underrepresented. Enhancing detection in these areas can help identify data exfiltration attempts.",
+          "While Credential Access has strong coverage, focusing on less covered techniques such as Network Sniffing (T1040) could provide more comprehensive detection of credential theft methods."
+        ]
+      },
+      "kill_chain_coverage": {
+        "description": "The detection coverage is heavily concentrated in the 'Exploitation' and 'Installation' phases of the Lockheed Martin kill chain, with a significant number of rules mapped to these stages. This suggests a strong focus on detecting and responding to post-compromise activities. However, there is relatively sparse coverage in the 'Reconnaissance' phase, which could be an area for improvement to catch threats earlier in the attack lifecycle.",
+        "insights": [
+          "Enhancing detection capabilities for the 'Reconnaissance' phase, particularly for techniques like 'Gather Victim Identity Information (T1589.002)' and 'Active Scanning (T1595)', could improve early threat detection and provide more opportunities to thwart attacks before they progress.",
+          "Consider adding more detection rules for the 'Command and Control' phase, specifically targeting techniques such as 'Proxy (T1090)' and 'Protocol Tunneling (T1572)', to better identify and respond to adversaries' attempts to maintain access and control over compromised systems.",
+          "Increasing detection coverage for the 'Actions on Objectives' phase, focusing on techniques like 'Data Destruction (T1485)' and 'Data Encrypted for Impact (T1486)', can enhance the ability to detect and mitigate potential data loss or encryption attacks."
+        ]
+      },
+      "tactic_killchain_heatmap": {
+        "description": "The detection coverage is heavily concentrated on certain tactics, with significant rule counts in Defense Evasion (T1562), Privilege Escalation (T1068), and Persistence (T1547), particularly in the Installation phase of the kill chain. However, there is a noticeable lack of coverage in the Reconnaissance (T1595) and Exfiltration (T1041) tactics, which could leave gaps in early detection and data loss prevention.",
+        "insights": [
+          "Enhancing detection rules for the Reconnaissance tactic (T1595) will improve early-stage detection capabilities, allowing for quicker identification of potential threats during the initial phases of an attack.",
+          "Increasing rule coverage for the Exfiltration tactic (T1041) will bolster the ability to detect and respond to data theft activities, which are critical to preventing data breaches.",
+          "There is an opportunity to improve detection in the Command and Control phase (T1071) by adding more rules, which will enhance the ability to identify and mitigate ongoing communications between compromised systems and attacker-controlled infrastructure."
+        ]
+      },
+      "top_techniques": {
+        "description": "The detection rules are heavily concentrated on a few techniques, with 'Command and Scripting Interpreter > PowerShell (T1059.001)' having the highest rule count. There is a noticeable focus on techniques related to credential access and account manipulation. However, other critical areas such as lateral movement and data exfiltration appear to have less coverage, which may limit the ability to detect these stages of an attack.",
+        "insights": [
+          "Consider increasing detection coverage for lateral movement techniques, such as 'Remote Desktop Protocol (T1021.001)' and 'SMB/Windows Admin Shares (T1021.002)', to improve detection capabilities during this critical phase of an attack.",
+          "Enhance detection for data exfiltration techniques like 'Exfiltration Over Web Service (T1567.002)' and 'Automated Exfiltration (T1020)', as these are key indicators of an attack reaching its final stages.",
+          "Expand coverage on 'Command and Control' techniques, such as 'Application Layer Protocol (T1071)' and 'Web Service (T1102)', to better identify and respond to adversaries establishing and maintaining control over compromised systems."
+        ]
+      },
+      "trending_coverage": {
+        "description": "The data highlights significant gaps in detection coverage for certain techniques that are frequently mentioned in real-world incidents. While some techniques like Command and Scripting Interpreter > PowerShell (T1059.001) have robust rule coverage, others like File and Directory Discovery (T1083) and Process Discovery (T1057) lack any detection rules despite their prevalence in incidents.",
+        "insights": [
+          "File and Directory Discovery (T1083) is mentioned in 30.6% of incidents but has no detection rules. Implementing rules for this technique will enhance your ability to detect reconnaissance activities.",
+          "Process Discovery (T1057) is involved in 21.6% of incidents and also lacks detection rules. Adding rules for this technique can improve detection of adversaries gathering information about running processes.",
+          "Scheduled Task/Job > At (T1053.002) is mentioned in 27.3% of incidents but has only 2 rules. Increasing rule coverage for this technique can help detect and respond to scheduled task abuses."
+        ]
+      }
+    },
+    "executive_summary": {
+      "summary_paragraph": "Your detection coverage shows strong emphasis on Credential Access and Persistence, but critical gaps exist in Lateral Movement and Collection tactics. Addressing these gaps, particularly in techniques with high incident rates but low rule coverage, will significantly enhance your threat detection capabilities.",
+      "priority_actions": [
+        {
+          "priority": "critical",
+          "action": "Implement detection rules for File and Directory Discovery (T1083) and Process Discovery (T1057).",
+          "rationale": "These techniques are involved in 30.6% and 21.6% of incidents respectively, yet lack any detection rules, as highlighted in the trending coverage insights.",
+          "estimated_effort": "medium",
+          "expected_impact": "Significant improvement in detecting reconnaissance activities and adversary presence."
+        },
+        {
+          "priority": "high",
+          "action": "Increase detection coverage for Lateral Movement techniques such as Remote Services (T1021) and Use Alternate Authentication Material (T1550).",
+          "rationale": "These techniques are underrepresented in both tactic coverage and tactic_killchain_heatmap insights, indicating a critical gap in detecting adversary movement within the network.",
+          "estimated_effort": "medium",
+          "expected_impact": "Enhanced ability to detect and respond to adversaries moving laterally within your network."
+        },
+        {
+          "priority": "high",
+          "action": "Expand detection rules for Command and Control techniques, specifically Application Layer Protocol (T1071) and Web Service (T1102).",
+          "rationale": "These techniques are mentioned in both kill_chain_coverage and top_techniques insights, indicating a need for improved detection of adversary communications.",
+          "estimated_effort": "medium",
+          "expected_impact": "Improved detection of ongoing communications between compromised systems and attacker infrastructure."
+        },
+        {
+          "priority": "medium",
+          "action": "Enhance detection for Collection tactics, focusing on Data from Network Shared Drive (T1039) and Email Collection (T1114).",
+          "rationale": "These areas are underrepresented in tactic_coverage insights, suggesting a need for better detection of data exfiltration attempts.",
+          "estimated_effort": "medium",
+          "expected_impact": "Better identification and prevention of data exfiltration activities."
+        },
+        {
+          "priority": "medium",
+          "action": "Increase rule coverage for Exfiltration tactics, particularly Exfiltration Over Web Service (T1567.002) and Automated Exfiltration (T1020).",
+          "rationale": "These techniques are key indicators of an attack's final stages, as noted in top_techniques insights.",
+          "estimated_effort": "medium",
+          "expected_impact": "Enhanced detection of data theft activities, critical for preventing data breaches."
+        },
+        {
+          "priority": "medium",
+          "action": "Add detection rules for Scheduled Task/Job > At (T1053.002).",
+          "rationale": "This technique is mentioned in 27.3% of incidents but has only 2 rules, as highlighted in trending_coverage insights.",
+          "estimated_effort": "medium",
+          "expected_impact": "Improved detection of scheduled task abuses, enhancing response capabilities."
+        },
+        {
+          "priority": "low",
+          "action": "Consider expanding coverage for Network Sniffing (T1040) under Credential Access.",
+          "rationale": "While Credential Access has strong coverage, this technique is less covered, as noted in tactic_coverage insights.",
+          "estimated_effort": "medium",
+          "expected_impact": "More comprehensive detection of credential theft methods."
+        }
+      ]
+    },
+    "coverage_gaps": {
+      "summary": "Use executive_summary for gap analysis",
+      "details": []
+    },
+    "recommendations": [],
+    "trends_analysis": {
+      "summary": "Use visualization_insights for trend analysis",
+      "alignment_score": null,
+      "well_covered": [],
+      "under_covered": [],
+      "over_represented": []
+    },
+    "anomalies": {
+      "summary": "Use visualization_insights for anomaly detection",
+      "anomalies": [],
+      "statistics": {}
+    }
+  },
+  "generated_at": "2026-02-02T11:30:18.584599+00:00",
+  "llm_config": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.3,
+    "max_tokens": 3000,
+    "response_format": {
+      "type": "json_object"
+    }
+  },
+  "metadata": {
+    "enabled_types": [
+      "visualization_insights",
+      "executive_summary",
+      "coverage_gaps",
+      "recommendations",
+      "trends_analysis",
+      "anomalies"
+    ],
+    "coverage_gap_threshold": 5,
+    "implementation_status": "llm_enabled",
+    "has_openai_key": true
+  }
+}

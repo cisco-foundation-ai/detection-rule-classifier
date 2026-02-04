@@ -1,0 +1,61 @@
+{
+  "kill_chain_stages": [
+    {
+      "id": "reconnaissance",
+      "name": "Reconnaissance",
+      "description": "Gathering information to plan future operations",
+      "kill_chain_step_number": 1
+    },
+    {
+      "id": "weaponization",
+      "name": "Weaponization",
+      "description": "Creating or preparing exploit code and payloads",
+      "kill_chain_step_number": 2
+    },
+    {
+      "id": "delivery",
+      "name": "Delivery",
+      "description": "Transmitting the weapon to the target environment",
+      "kill_chain_step_number": 3
+    },
+    {
+      "id": "exploitation",
+      "name": "Exploitation",
+      "description": "Exploiting vulnerabilities to execute code on target system",
+      "kill_chain_step_number": 4
+    },
+    {
+      "id": "installation",
+      "name": "Installation",
+      "description": "Installing malware or maintaining access on the target system",
+      "kill_chain_step_number": 5
+    },
+    {
+      "id": "command_and_control",
+      "name": "Command and Control",
+      "description": "Establishing command and control channel for remote manipulation",
+      "kill_chain_step_number": 6
+    },
+    {
+      "id": "actions_on_objectives",
+      "name": "Actions on Objectives",
+      "description": "Taking actions to achieve the intended objectives (data theft, destruction, etc.)",
+      "kill_chain_step_number": 7
+    }
+  ],
+  "tactic_mappings": {
+    "Reconnaissance": ["reconnaissance"],
+    "Initial Access": ["exploitation"],
+    "Execution": ["exploitation"],
+    "Persistence": ["installation"],
+    "Privilege Escalation": ["installation", "actions_on_objectives"],
+    "Defense Evasion": ["installation", "actions_on_objectives"],
+    "Credential Access": ["actions_on_objectives"],
+    "Discovery": ["actions_on_objectives"],
+    "Lateral Movement": ["actions_on_objectives"],
+    "Collection": ["actions_on_objectives"],
+    "Command and Control": ["command_and_control"],
+    "Exfiltration": ["actions_on_objectives"],
+    "Impact": ["actions_on_objectives"]
+  }
+}

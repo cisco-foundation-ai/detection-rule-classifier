@@ -1,0 +1,37 @@
+{
+  "input": {
+    "aggregated_data": "output/aggregation/aggregated_data.json"
+  },
+  "output": {
+    "insights": "output/aggregation/insights.json",
+    "pretty_print": true
+  },
+  "llm": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.3,
+    "max_tokens": 3000,
+    "response_format": { "type": "json_object" }
+  },
+  "insights": {
+    "enabled_types": [
+      "visualization_insights",
+      "executive_summary",
+      "coverage_gaps",
+      "recommendations",
+      "trends_analysis",
+      "anomalies"
+    ],
+    "executive_summary": {
+      "max_critical_gaps": 5,
+      "max_priority_actions": 5
+    },
+    "visualization_insights": {
+      "max_findings_per_viz": 3,
+      "max_recommendations_per_viz": 3,
+      "max_anomalies_per_viz": 2
+    },
+    "coverage_gap_threshold": 5,
+    "trending_techniques_source": "visualization/data/trending_techniques.csv"
+  }
+}

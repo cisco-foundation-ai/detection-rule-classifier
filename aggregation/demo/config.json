@@ -1,0 +1,13 @@
+{
+  "input": {
+    "classified_output": "output/classification/classified_output.json"
+  },
+  "output": {
+    "aggregated_data": "output/aggregation/aggregated_data.json",
+    "save_config_snapshot": true,
+    "pretty_print": true
+  },
+  "processing": {
+    "trending_techniques_source": "visualization/data/trending_techniques.csv"
+  }
+}

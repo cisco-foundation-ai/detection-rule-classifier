@@ -1,0 +1,183 @@
+[tool.poetry]
+package-mode = false
+
+[project]
+name = "detection-rule-classifier"
+version = "0.1.0"
+description = "A framework for automatically mapping security detection rules to the MITRE ATT&CK framework and Cyber Kill Chain"
+requires-python = ">=3.11, <3.13"
+readme = "README.md"
+license = "Apache-2.0"
+keywords = ["cybersecurity", "detection-rules", "mitre", "kill-chain", "classification"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Information Technology",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+
+authors = [
+  {name = "Amos Yoffe"},
+  {name = "Ron Schapira"},
+  {name = "Ron Kupfer"},
+  {name = "Rotem Bar On"},
+  {name = "Avi Zohary"},
+  {name = "Ron Kupfer"},
+  {name = "David J Bianco"},
+  {name = "Ryan Fetterman"}
+]
+maintainers = [
+  {name = "Amos Yoffe"},
+  {name = "Ron Schapira"},
+  {name = "Ron Kupfer"},
+  {name = "Rotem Bar On"},
+  {name = "Avi Zohary"},
+  {name = "Ron Kupfer"},
+  {name = "David J Bianco"},
+  {name = "Ryan Fetterman"}
+]
+
+dependencies = [
+  "pandas>=2.0.0",
+  "pyarrow>=10.0.0",
+  "pyyaml>=6.0.0",
+  "httpx>=0.24.0",
+  "tqdm>=4.66.0",
+  "mitreattack-python>=3.0.0",
+  "streamlit>=1.28.0",
+  "altair>=5.0.0",
+  "plotly>=5.0.0",
+]
+
+[project.optional-dependencies]
+viz = [
+  "streamlit>=1.28.0",
+  "altair>=5.0.0",
+  "plotly>=5.0.0",
+]
+classification = [
+  "torch>=2.0.0",
+  "transformers>=4.0.0",
+  "openai>=1.0.0",
+]
+dev = [
+  "pytest>=9.0.0",
+  "pytest-cov>=7.0.0",
+  "pytest-mock>=3.15.0",
+  "pytest-xdist>=3.5.0",
+  "pytest-timeout>=2.2.0",
+]
+all = [
+  "streamlit>=1.28.0",
+  "altair>=5.0.0",
+  "plotly>=5.0.0",
+  "torch>=2.0.0",
+  "transformers>=4.0.0",
+  "openai>=1.0.0",
+  "pytest>=9.0.0",
+  "pytest-cov>=7.0.0",
+  "pytest-mock>=3.15.0",
+  "pytest-xdist>=3.5.0",
+  "pytest-timeout>=2.2.0",
+]
+
+[build-system]
+requires = ["setuptools>=77.0.0", "wheel", "setuptools_scm[toml]>=8"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+# No need to write to a file, we'll use the version from the git tag
+
+[tool.setuptools]
+packages = [
+  "aggregation",
+  "classification",
+  "mitre_mapping",
+  "rules_fetcher",
+  "visualization"
+]
+
+[tool.mypy]
+# Enable explicit package bases to avoid module name conflicts
+# This tells mypy which directories are actual Python packages
+# Note: explicit_package_bases requires namespace_packages = True
+explicit_package_bases = true
+namespace_packages = true
+follow_imports = "normal"
+
+# Ignore the root __init__.py to prevent treating workspace as a package
+[tool.mypy."__init__"]
+ignore_errors = true
+follow_imports = "skip"
+
+# Per-package rules
+[tool.mypy."classification.*"]
+follow_imports = "normal"
+
+[tool.mypy."mitre_mapping.*"]
+follow_imports = "normal"
+
+[tool.mypy."rules_fetcher.*"]
+follow_imports = "normal"
+
+[tool.mypy."visualization.*"]
+follow_imports = "normal"
+
+# Prevent mypy from treating the workspace root as a package
+# This fixes the "workspace.mitre_mapping" vs "mitre_mapping" conflict
+[tool.mypy."workspace.*"]
+ignore_errors = true
+follow_imports = "skip"
+
+
+[tool.pytest.ini_options]
+# Test discovery patterns
+testpaths = ["visualization/tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+# Command-line options
+addopts = [
+  "-v",
+  "--strict-markers",
+  "--cov=visualization",
+  "--cov-report=term-missing",
+  "--cov-report=html",
+  "--cov-report=xml",
+  "--cov-branch",
+]
+
+
+# Test markers
+markers = [
+  "unit: Unit tests for individual functions",
+  "integration: Integration tests requiring full app context",
+  "slow: Tests that take significant time to run",
+  "visual: Tests for Streamlit UI components",
+]
+
+
+# Coverage settings
+[tool.coverage.run]
+source = ["visualization"]
+omit = [
+  "*/tests/*",
+  "*/venv/*",
+  "*/__pycache__/*",
+  "*/.git/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "def __repr__",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+  "@abstractmethod",
+]
+

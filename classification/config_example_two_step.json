@@ -1,0 +1,21 @@
+{
+  "_comment": "Two-step classification: plausible (broad) → relevant (refined)",
+  "_comment_parallel": "num_workers (default 1) and retries (default 3) control parallel execution",
+  "num_workers": 1,
+  "retries": 3,
+  "plausible_step": {
+    "enabled": true,
+    "provider": "openai",
+    "model": "gpt-4o",
+    "top_k": 10,
+    "use_short_descriptions": true,
+    "prompt": "Given the following list of MITRE ATT&CK techniques:\n\n{descriptions}\n\nAnalyze this detection rule and identify up to {top_k} plausible techniques that could be related:\n\nDETECTION RULE:\n{rule_content}\n\nList only technique IDs, most likely first. No explanations."
+  },
+  "relevant_step": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "top_k": 3,
+    "use_short_descriptions": false,
+    "prompt": "A detection rule was analyzed and these techniques were identified as plausible:\n\n{plausible_techniques}\n\nHere are their descriptions:\n{descriptions}\n\nDETECTION RULE:\n{rule_content}\n\nFrom the plausible techniques (or others if clearly more relevant), select the MOST relevant techniques that this rule specifically detects (up to {top_k}, usually 1 is enough).\n\nList only technique IDs, most relevant first. No explanations."
+  }
+}
