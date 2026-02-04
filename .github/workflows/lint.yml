@@ -1,0 +1,59 @@
+---
+name: lint
+
+on:
+  push:
+    # Run superlinter on pushes to default branch
+    branches:
+      - main
+  # Run superlinter on pull request events
+  pull_request:
+
+# Declare default permissions as read-only
+permissions: read-all
+
+jobs:
+  super-linter:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+
+    steps:
+      - name: 🔒 harden runner
+        uses: step-security/harden-runner@e3f713f2d8f53843e71c69a996d56f51aa9adfb9 # v2.14.1
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: 🧹 run superlinter
+        uses: super-linter/super-linter@12562e48d7059cf666c43a4ecb0d3b5a2b31bd9e # v8.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IGNORE_GITIGNORED_FILES: true
+          LINTER_RULES_PATH: ".github/linters"
+          ENABLE_GITHUB_PULL_REQUEST_SUMMARY_COMMENT: false # Disable PR comments
+          SAVE_SUPER_LINTER_SUMMARY: false # Also disable summary saving
+          # GITHUB_ACTIONS_CONFIG_FILE: ".actionlint.yml"
+          MARKDOWN_CONFIG_FILE: ".markdownlint.yml"
+          PYTHON_FLAKE8_CONFIG_FILE: ".flake8"
+          PYTHON_ISORT_CONFIG_FILE: ".isort.cfg"
+          PYTHON_PYLINT_CONFIG_FILE: ".python-lint"
+          PYTHON_RUFF_CONFIG_FILE: ".ruff.toml"
+          TRIVY_CONFIG_FILE: ".trivy.yml"
+          YAML_CONFIG_FILE: ".yamllint.yml"
+          JUPYTER_NBQA_FLAKE8_CONFIG_FILE: ".flake8.jupiter"
+          JUPYTER_NBQA_PYLINT_CONFIG_FILE: ".python-lint.jupiter"
+          MULTI_STATUS: false
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_BIOME_FORMAT: false
+          VALIDATE_BIOME_LINT: false
+          #VALIDATE_JSCPD: false # TODO: Enable this once we configure jscpd.
+          VALIDATE_PRE_COMMIT: false
+          # Black and Ruff conflict in their formatting.
+          VALIDATE_PYTHON_RUFF_FORMAT: false
+          VALIDATE_PYTHON_ISORT: false # isort and pylint disagree.
+          VALIDATE_JUPYTER_NBQA_RUFF: false

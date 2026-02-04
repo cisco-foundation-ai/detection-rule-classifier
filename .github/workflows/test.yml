@@ -1,0 +1,55 @@
+---
+name: test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions: read-all
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@e3f713f2d8f53843e71c69a996d56f51aa9adfb9 # v2.14.1
+        with:
+          egress-policy: audit
+
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[viz]"
+          pip install -e ".[classification]"
+          pip install -e ".[dev]"
+
+      - name: Run tests with coverage
+        run: |
+          pytest --cov --cov-report=xml:output/tests/coverage.xml --cov-report=term
+
+      - name: Upload coverage reports
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
+        with:
+          file: ./output/tests/coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false

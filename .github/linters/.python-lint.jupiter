@@ -1,0 +1,70 @@
+# Basic Checker Options.
+# See: https://pylint.pycqa.org/en/latest/user_guide/configuration/all-options.html#basic-checker
+[BASIC]
+
+# Regular expression matching correct type variable names.
+typevar-rgx=^_?[A-Z][A-Z0-9]*(?:_[A-Z][A-Z0-9]*)*$
+
+# Design Checker Options.
+# See: https://pylint.pycqa.org/en/latest/user_guide/configuration/all-options.html#design-checker
+[DESIGN]
+
+# Options for functions / methods.
+ignored-argument-names=_.*
+max-args=10
+max-branches=10
+max-positional-arguments=10
+max-locals=15
+max-returns=5
+max-statements=30
+
+# Options for class checks.
+max-attributes=25
+max-parents=5
+min-public-methods=0
+max-public-methods=10
+
+# Docstring Checker Options.
+no-docstring-rgx=^(__.*__|_[^_].*|test_.*)$
+
+# Exceptions Checker Options.
+# See: https://pylint.pycqa.org/en/latest/user_guide/configuration/all-options.html#exceptions-checker
+[EXCEPTIONS]
+
+# Exceptions that will emit a warning when being caught.
+overgeneral-exceptions=builtins.Exception,builtins.StandardError,builtins.BaseException
+
+# Format Checker Options.
+# See: https://pylint.pycqa.org/en/latest/user_guide/configuration/all-options.html#format-checker
+[FORMAT]
+
+max-line-length=88
+max-module-lines=10000
+
+# Regexp for a line that is allowed to be longer than the limit.
+ignore-long-lines=(?x)
+  (^\s*(\w*\s*=\s*|[^,]*,\s*)?f?("|').*("|'),?\s*$
+   |^[^#]*\#\s*type:\s*[a-zA-Z_][a-zA-Z0-9_\-.,:[\] ]*$
+   |"""
+   |(https?|ftp):)
+# END REGEXP '
+
+# Main Checker Options.
+# See: https://pylint.pycqa.org/en/latest/user_guide/configuration/all-options.html#main-checker
+[MAIN]
+
+# Rules disabled globally.
+# import-error: Disabled since dependencies are not installed in the CI environment.
+# missing-module-docstring: Disabled to not require docstrings for __init__.py and test_*.py files.
+disable=import-error,missing-module-docstring,invalid-name,wrong-import-position,wrong-import-order,reimported
+
+# Number of processes to use for parallel checking.
+# Specifying 0 will auto-detect the number of processors available.
+jobs=0
+
+# Similarities Checker Options.
+# See: https://pylint.pycqa.org/en/latest/user_guide/configuration/all-options.html#similarities-checker
+[SIMILARITIES]
+
+# Minimum lines number of a similarity.
+min-similarity-lines=10
