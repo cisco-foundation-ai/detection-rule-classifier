@@ -8,7 +8,7 @@ LLM-driven Understanding, Classification & Insight for Detections
 
 ## About The Project
 
-[LUCID](https://fdtn.ai/blog) is a system for classifying an organization’s
+[LUCID](https://www.linkedin.com/pulse/from-rules-reasoning-unleashing-llms-detection-logic-fdtn-ytxfc/) is a system for classifying an organization’s
 detection rules and generating actionable insights from them.
 
 It enables you to automatically classify security detection rules into
@@ -17,7 +17,7 @@ as corresponding Cyber Kill Chain stages. These classifications are then
 used to generate actionable insights.
 
 **The system, its motivations and methodology are described in detail
-in [this blog post](https://fdtn.ai/blog)
+in [this blog post](https://www.linkedin.com/pulse/from-rules-reasoning-unleashing-llms-detection-logic-fdtn-ytxfc/)
 ([demo here](https://fai-detection-rule-classification.streamlit.app/)).
 This repository contains LUCID's source code.**
 
