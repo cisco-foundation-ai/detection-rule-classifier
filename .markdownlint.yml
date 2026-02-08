@@ -1,0 +1,19 @@
+# Markdown linting configuration for markdownlint
+# See: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+
+# MD013: Line length
+MD013:
+  # Maximum line length
+  line_length: 80
+  # Number of characters for headings
+  heading_line_length: 80
+  # Number of characters for code blocks
+  code_block_line_length: 120
+  # Include code blocks in line length check
+  code_blocks: true
+  # Include tables in line length check
+  tables: true
+  # Include headings in line length check
+  headings: true
+  # Strict length checking
+  strict: false
