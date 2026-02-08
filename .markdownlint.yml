@@ -17,5 +17,3 @@ MD013:
   headings: true
   # Strict length checking
   strict: false
-  # Allow URLs to exceed line length (common practice)
-  stern: false
