@@ -47,7 +47,7 @@ jobs:
 
       - name: Upload coverage reports
         if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
-        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           file: ./output/tests/coverage.xml
           flags: unittests
